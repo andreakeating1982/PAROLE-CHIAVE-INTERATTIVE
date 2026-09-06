@@ -1,0 +1,54 @@
+{
+  "app_title": "PAROLE CHIAVE IL SISTEMA SOLARE",
+  "pdf_title": "IL SISTEMA SOLARE",
+  "questions": [
+    {
+      "number": 1,
+      "question": "MAPA 1 - IL SOLE",
+      "options": ["È una stella", "È un pianeta", "È un satellite"],
+      "correctAnswer": "È una stella"
+    },
+    {
+      "number": 2,
+      "question": "MAPA 1 - I PIANETI INTERNI",
+      "options": ["Mercurio", "Giove", "Venere", "Marte"],
+      "correctAnswer": "Marte"
+    },
+    {
+      "number": 3,
+      "question": "MAPA 1 - LA TERRA",
+      "options": ["Ha due lune", "È il terzo pianeta", "È un gigante gassoso"],
+      "correctAnswer": "È il terzo pianeta"
+    },
+    {
+      "number": 4,
+      "question": "MAPA 1 - I GIGANTI GASSOSI",
+      "options": ["Giove", "Mercurio", "Saturno", "Venere"],
+      "correctAnswer": ["Giove", "Saturno"]
+    },
+    {
+      "number": 5,
+      "question": "MAPA 1 - I CORPI MINORI",
+      "options": ["Asteroidi", "Stelle", "Comete", "Buchi neri"],
+      "correctAnswer": ["Asteroidi", "Comete"]
+    },
+    {
+      "number": 6,
+      "question": "MAPA 2 - LA LUNA",
+      "options": ["Ruota intorno alla Terra", "È una stella", "Emette luce propria"],
+      "correctAnswer": "Ruota intorno alla Terra"
+    },
+    {
+      "number": 7,
+      "question": "MAPA 2 - LE STELLE",
+      "options": ["Sono corpi gassosi incandescenti", "Sono pianeti", "Sono satelliti"],
+      "correctAnswer": "Sono corpi gassosi incandescenti"
+    },
+    {
+      "number": 8,
+      "question": "MAPA 2 - LE GALASSIE",
+      "options": ["Contengono miliardi di stelle", "Sono vuote", "Sono singole stelle"],
+      "correctAnswer": "Contengono miliardi di stelle"
+    }
+  ]
+}

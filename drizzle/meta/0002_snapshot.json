@@ -1,0 +1,19 @@
+{
+  "version": "2",
+  "tables": {},
+  "enums": {},
+  "_meta": {
+    "columns": {
+      "students": {
+        "lastActiveAt": {
+          "name": "last_active_at",
+          "type": "timestamp",
+          "notNull": false,
+          "default": "now()"
+        }
+      }
+    },
+    "schemas": {},
+    "tables": {}
+  }
+}

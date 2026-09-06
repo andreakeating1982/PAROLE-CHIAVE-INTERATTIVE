@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: parole-chiave-interattive
+    runtime: node
+    plan: free
+    buildCommand: "pnpm install --no-frozen-lockfile && pnpm build"
+    startCommand: "pnpm start"
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: NODE_ENV
+        value: "production"
+      - key: DATABASE_URL
+        sync: false
+      - key: BETTER_AUTH_SECRET
+        generateValue: true
+      - key: TRUSTED_ORIGINS
+        sync: false

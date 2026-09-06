@@ -1,0 +1,62 @@
+============================================================
+   PAROLE CHIAVE SORGENTE — Quiz Interattivo
+   ISTRUZIONI PER GITHUB (sorgente per clonazioni future)
+============================================================
+
+Questo pacchetto è l'APP SORGENTE. Serve come base per generare
+NUOVE app identiche che cambiano SOLO il set delle domande.
+La nuova app si crea con la skill "parole-chiave-sorgente"
+(cartella skills/parole-chiave-sorgente/).
+
+------------------------------------------------------------
+1. CREA UN REPOSITORY SU GITHUB
+------------------------------------------------------------
+   - Vai su https://github.com e clicca "+" → "New repository"
+   - Nome: parole-chiave-sorgente (o quello che preferisci)
+   - Lascialo PUBLIC (serve per clonare senza autenticazione)
+   - NON inizializzare con README (è già incluso)
+   - Clicca "Create repository"
+
+------------------------------------------------------------
+2. CARICA I FILE
+------------------------------------------------------------
+   Opzione A (semplice):
+   - Estrai questo ZIP in una cartella
+   - Trascina TUTTI i file nella pagina del repository
+   - In basso clicca "Commit changes"
+
+   Opzione B (con Git):
+   git init
+   git add .
+   git commit -m "PAROLE CHIAVE SORGENTE"
+   git branch -M main
+   git remote add origin https://github.com/TUO-USERNAME/parole-chiave-sorgente.git
+   git push -u origin main
+
+------------------------------------------------------------
+3. CHIEDI UNA NUOVA APP A MARKY
+------------------------------------------------------------
+   Quando vuoi un'app simile con un set di domande diverso,
+   dai a Marky l'URL della repository (es.
+   https://github.com/TUO-USERNAME/parole-chiave-sorgente.git)
+   insieme alle 8 nuove domande.
+
+   Marky userà lo script rebuild_app.py con il flag --source
+   per clonare direttamente da GitHub e generare la nuova app.
+
+   In alternativa, per clonare dai file locali (senza GitHub):
+   python skills/parole-chiave-sorgente/scripts/rebuild_app.py \
+     --name nome-nuova-app \
+     --questions percorso/domande.json \
+     --app-title "TITOLO UI" \
+     --pdf-title "TITOLO PDF"
+
+------------------------------------------------------------
+CONTENUTO DEL PACCHETTO
+------------------------------------------------------------
+   - Codice sorgente completo dell'app (client/ + server/)
+   - Skill di clonazione: skills/parole-chiave-sorgente/
+   - README.md (documentazione dettagliata)
+   - ISTRUZIONI-GITHUB.txt (questo file)
+
+============================================================

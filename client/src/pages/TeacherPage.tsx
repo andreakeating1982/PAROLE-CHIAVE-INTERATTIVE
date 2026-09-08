@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import { generateReportPdf, generateBlankQuestionsPdf } from "@/lib/reportPdf";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 /* ═══════════════════════ GROUP PANEL ═══════════════════════ */
 
@@ -435,16 +436,15 @@ export default function TeacherPage() {
                             const mapa1Done = mapa1Answers.length >= 5;
                             const mapa2Done = mapa2Answers.length >= 3;
                             return (
-                              <div key={s.id} className="rounded-xl border border-border/60">
+                              <div key={s.id} className="rounded-xl border border-border/50 bg-muted/10">
                                 <button
                                   onClick={() => setExpandedStudent(isExpanded ? null : s.id)}
-                                  className={`w-full flex items-center gap-2 sm:gap-3 p-3 sm:p-4 bg-muted/20 hover:bg-muted/50 transition-colors text-left ${isExpanded ? 'rounded-t-xl' : 'rounded-xl'}`}
+                                  className={`w-full flex items-center gap-2 sm:gap-3 px-3 py-2.5 sm:px-4 hover:bg-muted/30 transition-colors text-left ${isExpanded && hasAnswers ? 'rounded-t-xl' : 'rounded-xl'}`}
                                 >
-                                  {/* Hotspot grigio singolo a sinistra */}
-                                  <div className="size-2 rounded-full shrink-0 bg-gray-300" />
+                                  <div className="size-2.5 rounded-full shrink-0 bg-gray-300"></div>
                                   <div className="flex-1 min-w-0">
                                     <span
-                                      className="group relative block min-w-0 font-bold text-sm text-foreground text-left cursor-pointer"
+                                      className="group relative block min-w-0 font-semibold text-sm text-foreground text-left cursor-pointer"
                                       onClick={(e: any) => {
                                         if (window.matchMedia('(hover: none)').matches) {
                                           e.stopPropagation();
@@ -453,20 +453,32 @@ export default function TeacherPage() {
                                       }}
                                     >
                                       <span className="block truncate uppercase">{s.name}</span>
-                                      <span className={`pointer-events-none absolute left-1/2 top-full z-[100] mt-2 -translate-x-1/2 max-w-[85vw] rounded-md bg-black px-3 py-1.5 text-xs text-white shadow-lg transition-opacity duration-150 ${tooltipStudent === s.id ? "opacity-100" : "opacity-0 group-hover:opacity-100 group-active:opacity-100 group-focus:opacity-100"}`}>
+                                      <span className={`pointer-events-none absolute left-1/2 bottom-full z-[100] mb-2 -translate-x-1/2 max-w-[85vw] rounded-md bg-black px-3 py-1.5 text-xs text-white uppercase shadow-lg transition-opacity duration-150 ${tooltipStudent === s.id ? "opacity-100" : "opacity-0 group-hover:opacity-100 group-active:opacity-100 group-focus:opacity-100"}`}>
                                         {s.name}
                                       </span>
                                     </span>
                                   </div>
-                                  <div className={`text-xs sm:text-sm font-bold shrink-0 whitespace-nowrap ${hasAnswers ? scoreColor(correctCount) : 'text-orange-500'}`}>
+                                  <div className={`text-[10px] sm:text-xs font-bold shrink-0 text-center leading-tight max-w-[70px] ${hasAnswers ? scoreColor(correctCount) : 'text-orange-500'}`}>
                                     {hasAnswers ? correctCount + '/10' : 'IN ATTESA DI INVIO'}
                                   </div>
-                                  <div className="flex items-center gap-0.5 shrink-0">
-                                    <Button variant="ghost" size="sm" onClick={(e) => { e.stopPropagation(); rmStudent.mutate({ id: s.id }); }} disabled={rmStudent.isPending} className="text-red-400 hover:text-red-600 hover:bg-red-50 px-1.5 h-7" title="Rimuovi lo studente">
+                                  <div className="hidden lg:flex items-center gap-1.5 shrink-0">
+                                    {[{ label: 'MAPA 1', submitted: mapa1Done, count: mapa1Answers.length, total: 5, color: '#047857' }, { label: 'MAPA 2', submitted: mapa2Done, count: mapa2Answers.length, total: 3, color: '#1d4ed8' }].map((ms, i) => (
+                                      <Tooltip key={i}>
+                                        <TooltipTrigger asChild>
+                                          <div className={`size-2.5 rounded-full cursor-default ${ms.submitted ? '' : 'border-2'}`} style={ms.submitted ? { backgroundColor: ms.color } : { borderColor: ms.color, backgroundColor: 'transparent' }}></div>
+                                        </TooltipTrigger>
+                                        <TooltipContent side="top" className="px-3 py-1.5">
+                                          <p className="text-[10px] font-bold uppercase">{ms.label}: {ms.submitted ? ms.count + '/' + ms.total + ' inviate' : 'IN ATTESA DI INVIO'}</p>
+                                        </TooltipContent>
+                                      </Tooltip>
+                                    ))}
+                                  </div>
+                                  <div className="flex items-center gap-0.5 shrink-0 ml-1">
+                                    <Button variant="ghost" size="sm" onClick={(e) => { e.stopPropagation(); rmStudent.mutate({ id: s.id }); }} disabled={rmStudent.isPending} className="text-red-500 hover:text-red-700 hover:bg-red-100 px-1.5 h-7 rounded-full" title="Rimuovi studente">
                                       <XCircle className="size-4" />
                                     </Button>
                                     {hasAnswers && (
-                                      <div className="text-muted-foreground ml-0.5">
+                                      <div className="text-muted-foreground">
                                         {isExpanded ? <ChevronUp className="size-4" /> : <ChevronDown className="size-4" />}
                                       </div>
                                     )}

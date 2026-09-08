@@ -452,7 +452,7 @@ export default function TeacherPage() {
                                         }
                                       }}
                                     >
-                                      <span className="block truncate">{s.name}</span>
+                                      <span className="block truncate uppercase">{s.name}</span>
                                       <span className={`pointer-events-none absolute left-1/2 top-full z-[100] mt-2 -translate-x-1/2 max-w-[85vw] rounded-md bg-black px-3 py-1.5 text-xs text-white shadow-lg transition-opacity duration-150 ${tooltipStudent === s.id ? "opacity-100" : "opacity-0 group-hover:opacity-100 group-active:opacity-100 group-focus:opacity-100"}`}>
                                         {s.name}
                                       </span>
@@ -473,67 +473,57 @@ export default function TeacherPage() {
                                   </div>
                                 </button>
                                 {isExpanded && (
-                                  <div className="border-t border-border/60 bg-muted/10 p-4 space-y-4 rounded-b-xl">
+                                  <div className="border-t border-border/40 bg-muted/15 p-4 space-y-4 rounded-b-xl">
                                     {/* ── MAPA 1 ── */}
                                     {mapa1Answers.length > 0 && (
-                                      <div>
-                                        <div className="flex items-center gap-2 mb-2">
-                                          <div className="h-0.5 flex-1 bg-emerald-200" />
-                                          <span className="text-[10px] font-bold text-emerald-700 uppercase tracking-wider">MAPA 1</span>
-                                          <div className="h-0.5 flex-1 bg-emerald-200" />
-                                        </div>
-                                        <div className="space-y-1">
-                                          {mapa1Answers.sort((a:any,b:any) => a.questionNumber - b.questionNumber).map((answer:any) => (
-                                            <div key={answer.questionNumber} className="flex items-center gap-2 text-sm px-3 py-1.5 rounded-lg bg-white/60">
-                                              <span className="text-muted-foreground font-mono text-[11px] w-5 shrink-0">#</span>
-                                              {answer.isCorrect ? (
-                                                <CheckCircle2 className="size-3.5 text-green-600 shrink-0" />
-                                              ) : (
-                                                <XCircle className="size-3.5 text-red-500 shrink-0" />
-                                              )}
-                                              <span className={`text-xs truncate ${answer.isCorrect ? 'text-green-700' : 'text-red-600'}`}>
+                                      <div className="space-y-1.5">
+                                        <p className="text-[10px] font-bold uppercase tracking-wider text-center" style={{ color: '#047857' }}>MAPA 1</p>
+                                        {mapa1Answers.sort((a:any,b:any) => a.questionNumber - b.questionNumber).map((answer:any) => (
+                                          <div key={answer.questionNumber} className="flex items-start gap-2 px-3 py-2 rounded-lg bg-white/70 border border-border/30">
+                                            <span className="text-muted-foreground font-mono text-[11px] w-5 shrink-0 leading-4">#</span>
+                                            {answer.isCorrect ? (
+                                              <CheckCircle2 className="size-4 text-green-600 shrink-0 mt-0.5" />
+                                            ) : (
+                                              <XCircle className="size-4 text-red-500 shrink-0 mt-0.5" />
+                                            )}
+                                            <div className="flex-1 min-w-0 space-y-0.5">
+                                              <span className={`block text-xs font-medium break-words ${answer.isCorrect ? 'text-green-700' : 'text-red-600'}`} title={answer.selectedAnswer}>
                                                 {answer.selectedAnswer || '—'}
                                               </span>
                                               {!answer.isCorrect && answer.correctAnswer && (
-                                                <>
-                                                  <span className="text-muted-foreground text-xs shrink-0">→</span>
-                                                  <span className="text-xs text-green-600 truncate">{answer.correctAnswer}</span>
-                                                </>
+                                                <span className="block text-xs font-medium text-green-700 break-words" title={answer.correctAnswer}>
+                                                  <span className="text-muted-foreground mr-1">→</span>{answer.correctAnswer}
+                                                </span>
                                               )}
                                             </div>
-                                          ))}
-                                        </div>
+                                          </div>
+                                        ))}
                                       </div>
                                     )}
                                     {/* ── MAPA 2 ── */}
                                     {mapa2Answers.length > 0 && (
-                                      <div>
-                                        <div className="flex items-center gap-2 mb-2">
-                                          <div className="h-0.5 flex-1 bg-blue-200" />
-                                          <span className="text-[10px] font-bold text-blue-700 uppercase tracking-wider">MAPA 2</span>
-                                          <div className="h-0.5 flex-1 bg-blue-200" />
-                                        </div>
-                                        <div className="space-y-1">
-                                          {mapa2Answers.sort((a:any,b:any) => a.questionNumber - b.questionNumber).map((answer:any) => (
-                                            <div key={answer.questionNumber} className="flex items-center gap-2 text-sm px-3 py-1.5 rounded-lg bg-white/60">
-                                              <span className="text-muted-foreground font-mono text-[11px] w-5 shrink-0">#</span>
-                                              {answer.isCorrect ? (
-                                                <CheckCircle2 className="size-3.5 text-green-600 shrink-0" />
-                                              ) : (
-                                                <XCircle className="size-3.5 text-red-500 shrink-0" />
-                                              )}
-                                              <span className={`text-xs truncate ${answer.isCorrect ? 'text-green-700' : 'text-red-600'}`}>
+                                      <div className="space-y-1.5">
+                                        <p className="text-[10px] font-bold uppercase tracking-wider text-center" style={{ color: '#1d4ed8' }}>MAPA 2</p>
+                                        {mapa2Answers.sort((a:any,b:any) => a.questionNumber - b.questionNumber).map((answer:any) => (
+                                          <div key={answer.questionNumber} className="flex items-start gap-2 px-3 py-2 rounded-lg bg-white/70 border border-border/30">
+                                            <span className="text-muted-foreground font-mono text-[11px] w-5 shrink-0 leading-4">#</span>
+                                            {answer.isCorrect ? (
+                                              <CheckCircle2 className="size-4 text-green-600 shrink-0 mt-0.5" />
+                                            ) : (
+                                              <XCircle className="size-4 text-red-500 shrink-0 mt-0.5" />
+                                            )}
+                                            <div className="flex-1 min-w-0 space-y-0.5">
+                                              <span className={`block text-xs font-medium break-words ${answer.isCorrect ? 'text-green-700' : 'text-red-600'}`} title={answer.selectedAnswer}>
                                                 {answer.selectedAnswer || '—'}
                                               </span>
                                               {!answer.isCorrect && answer.correctAnswer && (
-                                                <>
-                                                  <span className="text-muted-foreground text-xs shrink-0">→</span>
-                                                  <span className="text-xs text-green-600 truncate">{answer.correctAnswer}</span>
-                                                </>
+                                                <span className="block text-xs font-medium text-green-700 break-words" title={answer.correctAnswer}>
+                                                  <span className="text-muted-foreground mr-1">→</span>{answer.correctAnswer}
+                                                </span>
                                               )}
                                             </div>
-                                          ))}
-                                        </div>
+                                          </div>
+                                        ))}
                                       </div>
                                     )}
                                   </div>

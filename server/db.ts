@@ -102,12 +102,26 @@ export async function deleteClass(id: string) {
 
 // ── Students ────────────────────────────────────────────────────────────────
 
+/**
+ * Normalizza un nome per il matching: minuscole, niente accenti, spazi
+ * multipli collassati. Così "Mario Rossi", "mario rossi", "Mario  Rossi" e
+ * "MARIO ROSSI" vengono riconosciuti come lo stesso studente.
+ */
+function normalizeStudentName(name: string): string {
+  return name
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 export async function addStudent(data: { id: string; name: string; classId: string }) {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
   return db
     .insert(schema.students)
-    .values({ id: data.id, name: data.name, classId: data.classId })
+    .values({ id: data.id, name: data.name.trim().replace(/\s+/g, " "), classId: data.classId })
     .returning()
     .then((r: any[]) => r[0]);
 }
@@ -143,28 +157,26 @@ export async function getStudentById(id: string) {
 export async function getStudentByNameAndClass(name: string, classId: string) {
   const db = await getDb();
   if (!db) return null;
-  return db
+  const normalized = normalizeStudentName(name);
+  const all = await db
     .select()
     .from(schema.students)
     .where(and(
-      eq(schema.students.name, name),
       eq(schema.students.classId, classId),
       eq(schema.students.removed, false)
-    ))
-    .then((r: any[]) => r[0] ?? null);
+    ));
+  return all.find((s) => normalizeStudentName(s.name) === normalized) ?? null;
 }
 
 export async function getStudentByNameAndClassIncludingRemoved(name: string, classId: string) {
   const db = await getDb();
   if (!db) return null;
-  return db
+  const normalized = normalizeStudentName(name);
+  const all = await db
     .select()
     .from(schema.students)
-    .where(and(
-      eq(schema.students.name, name),
-      eq(schema.students.classId, classId)
-    ))
-    .then((r: any[]) => r[0] ?? null);
+    .where(eq(schema.students.classId, classId));
+  return all.find((s) => normalizeStudentName(s.name) === normalized) ?? null;
 }
 
 export async function reactivateStudent(id: string) {

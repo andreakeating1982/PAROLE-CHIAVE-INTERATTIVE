@@ -66,7 +66,7 @@ export default function Home() {
                 </div>
                 <h2 className="text-xl sm:text-2xl font-bold text-foreground">TROVA LA TUA CLASSE</h2>
                 <p className="text-sm text-muted-foreground leading-relaxed max-w-sm text-center">
-                  Inserisci il codice fornito dal docente per iniziare l&rsquo;attività.
+                  INSERISCI IL CODICE FORNITO DAL DOCENTE PER INIZIARE L'ATTIVITÀ
                 </p>
 
                 <div className="w-full space-y-3 mt-2">

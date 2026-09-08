@@ -252,7 +252,7 @@ export default function TeacherPage() {
             </h1>
             <a href="/" className="inline-flex mx-auto sm:mx-0 shrink-0 items-center gap-2 rounded-md border border-border bg-card px-3.5 py-2 text-sm font-medium text-foreground shadow-sm transition hover:border-plum/40 hover:text-plum">
               <Users className="size-4" />
-              Area studenti
+              AREA STUDENTI
             </a>
           </div>
         </header>
